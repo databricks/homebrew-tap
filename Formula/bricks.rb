@@ -21,7 +21,7 @@ class Bricks < Formula
   def install
     bin.install "bricks"
     generate_completions_from_executable(bin/"bricks", "completion")
-    ohai "Installation complete! Check if completions do work."
+    ohai "Installation complete! Check if 🧱 🧱 🧱 completions do work."
     puts <<~EOS
     To ensure bricks <TAB> completion works in zsh, you can add the directory 
     $(brew --prefix)/share/zsh/site-functions to your $fpath. You can do this by 
@@ -33,6 +33,9 @@ class Bricks < Formula
 
         echo 'autoload -Uz compinit && compinit' >> ~/.zshrc
 
+    ... and open new terminal window.
+
+    See https://docs.brew.sh/Shell-Completion
     EOS
   end
 
