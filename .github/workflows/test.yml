@@ -41,4 +41,4 @@ jobs:
 
       - name: Run CLI
         run: |
-          databricks --version
+          databricks version
