@@ -7,6 +7,7 @@ class Databricks < Formula
   download_prefix = "https://databricks-bricks.s3.amazonaws.com"
   arch_string = Hardware::CPU.intel? ? "amd64" : "arm64"
   darwin_url = "#{download_prefix}/v#{version}/databricks_cli_#{version}_darwin_#{arch_string}.zip"
+  linux_url = "#{download_prefix}/v#{version}/databricks_cli_#{version}_linux_#{arch_string}.zip"
 
   if OS.mac? && Hardware::CPU.intel?
     url darwin_url
@@ -16,6 +17,16 @@ class Databricks < Formula
   if OS.mac? && Hardware::CPU.arm?
     url darwin_url
     sha256 "391d34e80950942245fabf044d617800223b2c4ee82d409bb43b40bd8b96b329"
+  end
+
+  if OS.linux? && Hardware::CPU.intel?
+    url linux_url
+    sha256 "4b15764b2646cae7b161ddec650ddee080b870cf470548c844260f1c41d8257b"
+  end
+
+  if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
+    url linux_url
+    sha256 "edf153830055b8acdbdf514bc4a88c3aab65f97e0e5ca4c68fe60257fc205ab1"
   end
 
   def install
