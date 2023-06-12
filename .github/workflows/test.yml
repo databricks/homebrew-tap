@@ -1,0 +1,40 @@
+name: build
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+  push:
+    branches: [main]
+
+  workflow_dispatch:
+
+jobs:
+  tests:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - macos-latest
+          - ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Install tap
+        run: |
+          git clone $PWD $(brew --prefix)/Library/Taps/databricks/homebrew-tap --origin=origin --template=
+
+      - name: Install CLI
+        run: |
+          brew install databricks
+
+      - name: Run CLI
+        run: |
+          databricks --version
