@@ -23,8 +23,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Configure Git
+        uses: Homebrew/actions/git-user-config@master
+
       - name: Set up Homebrew
-        id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@master
 
       - name: Install tap
