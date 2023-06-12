@@ -1,4 +1,4 @@
-name: build
+name: test
 
 on:
   pull_request:
@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  tests:
+  install:
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -23,13 +23,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up Homebrew
-        id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@master
+      - name: Configure Git
+        uses: Homebrew/actions/git-user-config@master
 
-      - name: Install tap
-        run: |
-          git clone $PWD $(brew --prefix)/Library/Taps/databricks/homebrew-tap --origin=origin --template=
+      # This action automatically installs the locally checked out tap.
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install CLI
         run: |
@@ -37,4 +38,4 @@ jobs:
 
       - name: Run CLI
         run: |
-          databricks --version
+          databricks version
