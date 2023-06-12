@@ -28,10 +28,12 @@ jobs:
 
       - name: Set up Homebrew
         uses: Homebrew/actions/setup-homebrew@master
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Install tap
-        run: |
-          git clone $PWD $(brew --prefix)/Library/Taps/databricks/homebrew-tap --origin=origin --template=
+      # - name: Install tap
+      #   run: |
+      #     git clone $PWD $(brew --prefix)/Library/Taps/databricks/homebrew-tap
 
       - name: Install CLI
         run: |
