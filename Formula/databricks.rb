@@ -2,7 +2,7 @@ class Databricks < Formula
   desc "Databricks"
   version "0.200.0"
 
-  download_prefix = "https://databricks-bricks.s3.amazonaws.com"
+  download_prefix = "https://github.com/databricks/cli/releases/download"
   arch_string = Hardware::CPU.intel? ? "amd64" : "arm64"
   darwin_url = "#{download_prefix}/v#{version}/databricks_cli_#{version}_darwin_#{arch_string}.zip"
   linux_url = "#{download_prefix}/v#{version}/databricks_cli_#{version}_linux_#{arch_string}.zip"
