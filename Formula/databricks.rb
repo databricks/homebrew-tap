@@ -49,6 +49,6 @@ class Databricks < Formula
   end
 
   test do
-    system "#{bin}/databricks version"
+    assert_match "Databricks CLI v#{version}", shell_output("#{bin}/databricks --version")
   end
 end
