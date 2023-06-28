@@ -32,13 +32,13 @@ class Databricks < Formula
     generate_completions_from_executable(bin/"databricks", "completion")
     ohai "Installation complete! Check if 🧱 🧱 🧱 completions do work."
     puts <<~EOS
-    To ensure bricks <TAB> completion works in zsh, you can add the directory 
-    $(brew --prefix)/share/zsh/site-functions to your $fpath. You can do this by 
+    To ensure Databricks <TAB> completion works in zsh, you can add the directory
+    $(brew --prefix)/share/zsh/site-functions to your $fpath. You can do this by
     adding it to your ~/.zshrc file:
 
         echo fpath+=$(brew --prefix)/share/zsh/site-functions >> ~/.zshrc
-    
-    Most likely you'll also have to rebuild completion index:
+
+    Most likely you'll also have to rebuild the completion index:
 
         echo 'autoload -Uz compinit && compinit' >> ~/.zshrc
 
