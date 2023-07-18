@@ -1,6 +1,6 @@
 class Databricks < Formula
   desc "Databricks"
-  version "0.200.2"
+  version "0.201.0"
 
   download_prefix = "https://github.com/databricks/cli/releases/download"
   arch_string = Hardware::CPU.intel? ? "amd64" : "arm64"
@@ -9,22 +9,22 @@ class Databricks < Formula
 
   if OS.mac? && Hardware::CPU.intel?
     url darwin_url
-    sha256 "918c50a5733bf94ca813f3e07ad3c663816c707dbfabedd0e67a3939217fcf09"
+    sha256 "04bed42589c0ec1fe4a79343e6b0e41a15c2c00c57d404e4c03a9477e8fd0d06"
   end
 
   if OS.mac? && Hardware::CPU.arm?
     url darwin_url
-    sha256 "02238db86ecb2527b0c36b7f792eb9d9c61675636b6c099b9cf31037cbb466bb"
+    sha256 "b44d7f520f9c902a64b8694d3caba7306fbad195763e6b59c88ffb85367f4788"
   end
 
   if OS.linux? && Hardware::CPU.intel?
     url linux_url
-    sha256 "5f15a893928103316edc421e04cb052d06065c18ae91a9900d05963181c6d832"
+    sha256 "2b6b0c88a2d8d84b4aa2fb7ac241e67e79767ce46ff4a96fb13a8fff313c5655"
   end
 
   if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
     url linux_url
-    sha256 "0f325bbd9b2f58968bde02cc79ea1513e077e678335b284c62d56eaa2b0749da"
+    sha256 "0aeb68dc4cce8df1cca86f456da9b3f57a637874892a3569a87e2d892d4813a7"
   end
 
   def install
