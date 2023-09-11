@@ -1,6 +1,6 @@
 class Databricks < Formula
   desc "Databricks"
-  version "0.204.0"
+  version "0.204.1"
 
   download_prefix = "https://github.com/databricks/cli/releases/download"
   arch_string = Hardware::CPU.intel? ? "amd64" : "arm64"
