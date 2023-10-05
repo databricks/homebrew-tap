@@ -1,0 +1,48 @@
+name: release-pr
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        required: true
+      darwin_amd64_sha:
+        type: string
+        required: true
+      darwin_arm64_sha:
+        type: string
+        required: true
+      linux_amd64_sha:
+        type: string
+        required: true
+      linux_arm64_sha:
+        type: string
+        required: true
+
+jobs:
+  release-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Change to a new release
+        run: |
+          sed -i -E "s/version \"(.*)\"/version \"${{ github.event.inputs.version }}\"/" Formula/databricks.rb
+          sed -i -E "s/darwin_amd64_sha = \"(.*)\"/darwin_amd64_sha = \"${{ github.event.inputs.darwin_amd64_sha }}\"/" Formula/databricks.rb
+          sed -i -E "s/darwin_arm64_sha = \"(.*)\"/darwin_arm64_sha = \"${{ github.event.inputs.darwin_arm64_sha }}\"/" Formula/databricks.rb
+          sed -i -E "s/linux_amd64_sha = \"(.*)\"/linux_amd64_sha = \"${{ github.event.inputs.linux_amd64_sha }}\"/" Formula/databricks.rb
+          sed -i -E "s/linux_arm64_sha = \"(.*)\"/linux_arm64_sha = \"${{ github.event.inputs.linux_arm64_sha }}\"/" Formula/databricks.rb
+
+      - name: Create a release pull request
+        id: cpr
+        uses: peter-evans/create-pull-request@v5
+        with:
+          author: "eng-dev-ecosystem-bot <eng-dev-ecosystem-bot@users.noreply.github.com>"
+          committer: "eng-dev-ecosystem-bot <eng-dev-ecosystem-bot@users.noreply.github.com>"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Release CLI version v${{ github.event.inputs.version }}
+          body: Release CLI version v${{ github.event.inputs.version }}
+          branch: release-v${{ github.event.inputs.version }}
+          title: 'Release CLI version v${{ github.event.inputs.version }}'
+          draft: false
