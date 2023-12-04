@@ -1,5 +1,7 @@
 class Databricks < Formula
-  desc "Databricks"
+  desc "Command-line interface for the Databricks platform"
+  homepage "https://github.com/databricks/cli"
+
   version "0.210.1"
 
   download_prefix = "https://github.com/databricks/cli/releases/download"
@@ -37,19 +39,19 @@ class Databricks < Formula
     generate_completions_from_executable(bin/"databricks", "completion")
     ohai "Installation complete! Check if 🧱 🧱 🧱 completions do work."
     puts <<~EOS
-    To ensure Databricks <TAB> completion works in zsh, you can add the directory
-    $(brew --prefix)/share/zsh/site-functions to your $fpath. You can do this by
-    adding it to your ~/.zshrc file:
+      To ensure Databricks <TAB> completion works in zsh, you can add the directory
+      $(brew --prefix)/share/zsh/site-functions to your $fpath. You can do this by
+      adding it to your ~/.zshrc file:
 
-        echo fpath+=$(brew --prefix)/share/zsh/site-functions >> ~/.zshrc
+          echo fpath+=$(brew --prefix)/share/zsh/site-functions >> ~/.zshrc
 
-    Most likely you'll also have to rebuild the completion index:
+      Most likely you'll also have to rebuild the completion index:
 
-        echo 'autoload -Uz compinit && compinit' >> ~/.zshrc
+          echo 'autoload -Uz compinit && compinit' >> ~/.zshrc
 
-    ... and open new terminal window.
+      ... and open new terminal window.
 
-    See https://docs.brew.sh/Shell-Completion
+      See https://docs.brew.sh/Shell-Completion
     EOS
   end
 
