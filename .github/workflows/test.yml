@@ -28,13 +28,11 @@ jobs:
 
       # This action automatically installs the locally checked out tap.
       - name: Set up Homebrew
-        id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install Homebrew Bundler RubyGems
-        if: steps.gems-cache.outputs.cache-hit != 'true'
         run: brew install-bundler-gems
 
       - name: Install CLI
