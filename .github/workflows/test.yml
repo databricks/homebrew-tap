@@ -32,9 +32,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Install Homebrew Bundler RubyGems
-        run: brew install-bundler-gems
-
       - name: Check the CLI formula
         run: |
           brew style databricks
