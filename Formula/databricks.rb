@@ -9,10 +9,10 @@ class Databricks < Formula
   darwin_url = "#{download_prefix}/v#{version}/databricks_cli_#{version}_darwin_#{arch_string}.zip"
   linux_url = "#{download_prefix}/v#{version}/databricks_cli_#{version}_linux_#{arch_string}.zip"
 
-  darwin_amd64_sha = "3639701171bb3735ce82131b5d1648f8d0f364461a4df50e6f182751708d2fc8"
-  darwin_arm64_sha = "31bf273eb2dce18b9499a39ac8a76fb232050c218123761561a627f69367c8ea"
-  linux_amd64_sha = "45050dade1a907789498df35567352bdb7bea3b8690799da4d5d7e7169b89bcc"
-  linux_arm64_sha = "a833dfd9abdffebc12da1c5a45d0b5310460aa307ecef6d78e563af76028b307"
+  darwin_amd64_sha = "b6ff05dea3ddd6313fab5b48ac42148b2741a656931504bdee9d0983ee6d1fba"
+  darwin_arm64_sha = "99b30ecc49ac02fdf53fdbf38701f8e976961a2a70d476fb3b7485ddfdcf3fb9"
+  linux_amd64_sha = "86af7bf24cc74e80396b2a8d67b34418c70eb61753964cd59f326237864ee98f"
+  linux_arm64_sha = "d3304eb28e821a12495922d735e5cb2e4afd0a719d1fe25a0b496c11716829d7"
 
   if OS.mac? && Hardware::CPU.intel?
     url darwin_url
