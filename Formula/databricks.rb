@@ -2,17 +2,17 @@ class Databricks < Formula
   desc "Command-line interface for the Databricks platform"
   homepage "https://github.com/databricks/cli"
 
-  version "0.252.0"
+  version "0.253.0"
 
   download_prefix = "https://github.com/databricks/cli/releases/download"
   arch_string = Hardware::CPU.intel? ? "amd64" : "arm64"
   darwin_url = "#{download_prefix}/v#{version}/databricks_cli_#{version}_darwin_#{arch_string}.zip"
   linux_url = "#{download_prefix}/v#{version}/databricks_cli_#{version}_linux_#{arch_string}.zip"
 
-  darwin_amd64_sha = "890c3aa6983a66bd6d6bd4eca7fa0715a5c00c343d9be68c19783301257bdb4a"
-  darwin_arm64_sha = "ffb1391104ca83eb295aaf9fc23ab626b0c23c2736fb5c7e81821e2e1b1595c7"
-  linux_amd64_sha = "9cd47cccf439dc42d147d1dc21e2071e56e56d227fc5e1c02366d74cfaa9fd3c"
-  linux_arm64_sha = "db4eae89d54460fe0077bfc2a3294124e56e6f05326ef9d801eeebc34d4bf47f"
+  darwin_amd64_sha = "8a1e9aa8318bea9c060ea8a09f79b2d301ebfbea00744f7bfc8648f4508ed574"
+  darwin_arm64_sha = "5d95dd4301b3854153daf30e56d6a376ac564f93d923ade9dfd73f52703ed031"
+  linux_amd64_sha = "ceaad6c0fb3ca10c7167c25a6e045999a56408852ee27fd1cddb5501a5d285ab"
+  linux_arm64_sha = "c4a655fe04ab1b5ee8396f2134d04f229a3b4f4d8e8a17a00670fe8dc455773c"
 
   if OS.mac? && Hardware::CPU.intel?
     url darwin_url
