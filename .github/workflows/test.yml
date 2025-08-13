@@ -32,11 +32,19 @@ jobs:
       - name: Configure Git
         uses: Homebrew/actions/git-user-config@master
 
+      - name: brew version
+        run: |
+          brew --version
+
       # This action automatically installs the locally checked out tap.
       - name: Set up Homebrew
         uses: Homebrew/actions/setup-homebrew@master
         with:
           stable: true
+
+      - name: brew version
+        run: |
+          brew --version
 
       - name: Check the CLI formula
         run: |
