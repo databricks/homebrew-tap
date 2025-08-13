@@ -36,10 +36,6 @@ jobs:
       - name: Set up Homebrew
         uses: Homebrew/actions/setup-homebrew@master
 
-      - name: brew doctor
-        run: |
-          brew doctor
-
       - name: brew config
         run: |
           brew config
