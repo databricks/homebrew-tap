@@ -35,6 +35,9 @@ jobs:
       # This action automatically installs the locally checked out tap.
       - name: Set up Homebrew
         uses: Homebrew/actions/setup-homebrew@master
+        with:
+          stable: true
+          debug: true
 
       - name: Check the CLI formula
         run: |
