@@ -48,6 +48,17 @@ jobs:
         run: |
           brew tap databricks/tap
 
+      - name: Debug Homebrew state
+        run: |
+          echo "Homebrew version:"
+          brew --version
+          echo "Current taps:"
+          brew tap
+          echo "Available formulae in databricks/tap:"
+          brew search databricks/tap/
+          echo "Formula info:"
+          brew info databricks/tap/databricks || echo "Formula not found"
+
       - name: Install CLI
         run: |
           brew install databricks
