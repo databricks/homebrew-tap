@@ -42,10 +42,6 @@ jobs:
         run: |
           brew style databricks
 
-      - name: brew version
-        run: |
-          brew --version
-
       - name: Install CLI
         run: |
           brew install databricks
