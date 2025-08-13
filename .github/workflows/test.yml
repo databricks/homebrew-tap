@@ -45,6 +45,9 @@ jobs:
         env:
           HOMEBREW_NO_INSTALL_FROM_API: 1
 
+      - name: brew version
+        run: |
+          brew --version
 
       - name: Install CLI
         run: |
