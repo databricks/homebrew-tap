@@ -46,6 +46,10 @@ jobs:
         run: |
           brew --version
 
+      - name: brew repo
+        run: |
+          brew --repo
+
       - name: Check the CLI formula
         run: |
           brew style databricks
