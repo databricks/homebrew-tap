@@ -44,6 +44,10 @@ jobs:
         run: |
           brew --version
 
+      - name: Tap databricks
+        run: |
+          brew tap databricks/tap
+
       - name: Install CLI
         run: |
           brew install databricks
