@@ -39,6 +39,9 @@ jobs:
       - name: Check the CLI formula
         run: |
           brew style databricks
+        env:
+          HOMEBREW_NO_INSTALL_FROM_API: 1
+
 
       - name: Install CLI
         run: |
