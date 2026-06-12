@@ -19,6 +19,12 @@ jobs:
   install:
     runs-on: ${{ matrix.os }}
 
+    # Homebrew 6.0.0 sandboxes installs on Linux using Bubblewrap (bwrap), which
+    # is not available as a working rootless executable on GitHub-hosted runners.
+    # Disable the Linux sandbox so installs work in CI (no effect on macOS).
+    env:
+      HOMEBREW_NO_SANDBOX_LINUX: 1
+
     strategy:
       fail-fast: false
       matrix:
@@ -37,6 +43,12 @@ jobs:
         uses: Homebrew/actions/setup-homebrew@98cfa07b984a61682e6cd3a0833fad2006cc84ba # main
         with:
           stable: true
+
+      # Homebrew 6.0.0 refuses to load formulae from untrusted third-party taps.
+      # The tap installed above is not trusted by default, so trust it before use.
+      - name: Trust the tap
+        run: |
+          brew trust databricks/tap
 
       - name: Check the CLI formula
         run: |
