@@ -38,6 +38,12 @@ jobs:
         with:
           stable: true
 
+      # Homebrew 6.0.0 refuses to load formulae from untrusted third-party taps.
+      # The tap installed above is not trusted by default, so trust it before use.
+      - name: Trust the tap
+        run: |
+          brew trust databricks/tap
+
       - name: Check the CLI formula
         run: |
           brew style databricks
