@@ -19,6 +19,12 @@ jobs:
   install:
     runs-on: ${{ matrix.os }}
 
+    # Homebrew 6.0.0 sandboxes installs on Linux using Bubblewrap (bwrap), which
+    # is not available as a working rootless executable on GitHub-hosted runners.
+    # Disable the Linux sandbox so installs work in CI (no effect on macOS).
+    env:
+      HOMEBREW_NO_SANDBOX_LINUX: 1
+
     strategy:
       fail-fast: false
       matrix:
