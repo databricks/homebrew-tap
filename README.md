@@ -79,6 +79,37 @@ You can clean up the tap with older versions with:
 brew untap databricks/tap-old
 ```
 
+## Installing the latest development build
+
+If you need the latest build of the [`main` branch](https://github.com/databricks/cli/tree/main),
+you can install it with `--HEAD`. This downloads the artifact of the latest successful
+[`release-build`](https://github.com/databricks/cli/actions/workflows/release-build.yml) run.
+
+GitHub only serves workflow artifacts to authenticated users, so you need to be logged in with
+[`gh auth login`](https://cli.github.com/manual/gh_auth_login) or set `HOMEBREW_GITHUB_API_TOKEN`.
+Note that the artifact contains the builds for all platforms and is about 200 MB.
+
+```bash
+# Uninstall the stable version (if it's already installed)
+brew uninstall databricks
+
+brew install --HEAD databricks/tap/databricks
+```
+
+The installed version is labeled with the commit it was built from (e.g. `HEAD-002627a`).
+A regular `brew upgrade` doesn't update it. To upgrade to the latest build, run:
+
+```bash
+brew upgrade --fetch-HEAD databricks
+```
+
+To revert back to the latest stable version, run:
+
+```bash
+brew uninstall databricks
+brew install databricks/tap/databricks
+```
+
 ## Shell completion
 
 As long as you have configured shell completion for Homebrew itself,
