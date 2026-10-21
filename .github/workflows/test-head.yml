@@ -1,0 +1,77 @@
+name: test-head
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+  push:
+    branches: [main]
+
+  # The HEAD build is the "cli" artifact of the release-build workflow in databricks/cli.
+  # That workflow can change without a change to this repository, so also run daily.
+  schedule:
+    - cron: "0 6 * * *"
+
+  workflow_dispatch:
+
+jobs:
+  install-head:
+    # GitHub only serves workflow artifacts to authenticated users, and only runners on
+    # an allowlist can perform authenticated operations, so this job runs on a self-hosted
+    # runner. Those are Linux only; the macOS archives are checked in the artifact instead.
+    runs-on:
+      group: databricks-protected-runner-group
+      labels: linux-ubuntu-latest
+
+    permissions:
+      contents: read
+
+    env:
+      # See test.yml.
+      HOMEBREW_NO_SANDBOX_LINUX: 1
+      HOMEBREW_GITHUB_API_TOKEN: ${{ github.token }}
+
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Configure Git
+        uses: Homebrew/actions/git-user-config@98cfa07b984a61682e6cd3a0833fad2006cc84ba # main
+
+      # This action automatically installs the locally checked out tap.
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@98cfa07b984a61682e6cd3a0833fad2006cc84ba # main
+        with:
+          stable: true
+
+      - name: Trust the tap
+        run: |
+          brew trust databricks/tap
+
+      - name: Install CLI from HEAD
+        run: |
+          brew install --HEAD databricks
+
+      - name: Run CLI
+        run: |
+          databricks version
+
+      # Checks that the HEAD build reports a dev version.
+      - name: Test the CLI formula
+        run: |
+          brew test databricks
+
+      # Checks the API-only path that detects newer builds.
+      - name: Upgrade CLI from HEAD
+        run: |
+          brew upgrade --fetch-HEAD databricks
+
+      - name: Check the artifact contains the macOS archives
+        run: |
+          artifact="$(brew --cache --HEAD databricks)/artifact.zip"
+          unzip -l "$artifact"
+          for arch in amd64 arm64; do
+            unzip -l "$artifact" | grep -q "databricks_cli_darwin_${arch}.zip" || {
+              echo "::error::$artifact does not contain databricks_cli_darwin_${arch}.zip"
+              exit 1
+            }
+          done
