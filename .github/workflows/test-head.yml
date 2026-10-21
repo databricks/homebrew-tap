@@ -55,7 +55,7 @@ jobs:
         run: |
           databricks version
 
-      # Checks that the HEAD build reports a dev version.
+      # The test asserts the version has a dev suffix.
       - name: Test the CLI formula
         run: |
           brew test databricks
