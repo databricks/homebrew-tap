@@ -161,6 +161,15 @@ class Databricks < Formula
     EOS
   end
 
+  def caveats
+    <<~EOS
+      The Databricks CLI may install Databricks AI tools (skills) for the coding agents
+      it finds on this machine the first time it runs. To turn this off:
+        databricks aitools auto-install disable
+      or set DATABRICKS_AITOOLS_AUTO_INSTALL=false
+    EOS
+  end
+
   test do
     # Snapshot builds report the next patch version with a dev suffix, e.g. v1.21.1-dev+002627a95.
     expected = version.head? ? /Databricks CLI v\d+\.\d+\.\d+-dev/ : "Databricks CLI v#{version}"
